@@ -41,12 +41,12 @@ func NewClientFromContext(c *cli.Context, sugar *zap.SugaredLogger) (*Client, er
 		apiKey, secretKey string
 	)
 	if c.String(binanceAPIKeyFlag) == "" {
-		return nil, errors.New("cannot create binance client, lack of api key")
+		sugar.Info("no binance API key ...")
 	}
 	apiKey = c.String(binanceAPIKeyFlag)
 
 	if c.String(binanceSecretKeyFlag) == "" {
-		return nil, errors.New("cannot create binance client, lack of secret key")
+		sugar.Info("no binance secret key ...")
 	}
 	secretKey = c.String(binanceSecretKeyFlag)
 	rps := c.Float64(binanceRequestPerSecond)

@@ -38,7 +38,7 @@ func main() {
 			Name:   tickerIntervalFlag,
 			Usage:  "ticker interval to fetch data",
 			EnvVar: "TICKER_INTERVAL",
-			Value:  defaultRetryDelay,
+			Value:  defaultTickerInterval,
 		},
 		cli.IntFlag{
 			Name:   attemptFlag,
