@@ -17,6 +17,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/KyberNetwork/reserve-stats/lib/timeutil"
+	"github.com/cyberliem/volume-surge-alarm/common"
 )
 
 const (
@@ -201,9 +202,10 @@ func (bc *Client) sendRequest(method, endpoint string, params map[string]string,
 }
 
 //GetBookTicker return exchange info for all symbol
-func (bc *Client) GetBookTicker() ([]BookTicker, error) {
+func (bc *Client) GetBookTicker() (common.PriceList, error) {
 	var (
-		result []BookTicker
+		bk     []BookTicker
+		result common.PriceList
 	)
 	const weight = 2
 	//Wait before creating the request to avoid timestamp request outside the recWindow
@@ -222,6 +224,9 @@ func (bc *Client) GetBookTicker() ([]BookTicker, error) {
 	if err != nil {
 		return result, err
 	}
-	err = json.Unmarshal(res, &result)
-	return result, err
+	err = json.Unmarshal(res, &bk)
+	if err != nil {
+		return result, nil
+	}
+	return toPriceList(bk)
 }
