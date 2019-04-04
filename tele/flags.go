@@ -23,7 +23,7 @@ func NewCliFlags() []cli.Flag {
 			EnvVar: "TELEBOT_API_KEY",
 		},
 		cli.Int64SliceFlag{
-			Name:   teleBotAPIFlag,
+			Name:   chatIDFlag,
 			Usage:  `chat IDs for the telebot, can be mutiple: example: --telebot-chat-ids={0, 1}`,
 			EnvVar: "TELEBOT_CHAT_IDS",
 		},
